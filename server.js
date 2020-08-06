@@ -21,6 +21,11 @@ app.get("/notes", function(req, res){
     res.sendFile(path.join(__dirname, "./notes.html"));
 });
 
+//Route for CSS
+app.get("/assets/css/styles.css", function(req, res){
+    res.sendFile(path.join(__dirname, "./assets/css/styles.css"))
+});
+
 //Starts the server to begin listening
 app.listen(PORT, function(){
     console.log("App is listening on PORT " + PORT)
