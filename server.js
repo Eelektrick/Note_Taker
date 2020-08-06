@@ -31,6 +31,11 @@ app.get("/assets/js/index.js", function(req, res){
     res.sendFile(path.join(_dirname, "./assets/js/index.js"))
 });
 
+//if no matching route iis found default to home
+app.get("*", function(req, res){
+    res.sendFile(path.join(_dirname, "./index.html"))
+});
+
 //Starts the server to begin listening
 app.listen(PORT, function(){
     console.log("App is listening on PORT " + PORT)
