@@ -16,7 +16,10 @@ app.use(express.urlencoded({extended: true}));
 app.use(express.json());
 
 //Routes
-
+//Route for HTML
+app.get("/notes", function(req, res){
+    res.sendFile(path.join(__dirname, "./notes.html"));
+});
 
 //Starts the server to begin listening
 app.listen(PORT, function(){
