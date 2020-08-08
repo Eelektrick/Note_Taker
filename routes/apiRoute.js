@@ -12,6 +12,7 @@ module.exports = function(app){
         res.json(dbFile);
     });
 
+    //add notes
     app.post("/api/notes", function(req, res){
         dbFile =JSON.parse(fs.readFileSync(jsonRoute, "utf8"));
 
@@ -22,13 +23,28 @@ module.exports = function(app){
         savedbFile(notes);
         res.json(notes);
     });
+
+    //delete notes
+    app.delete("/api/notes/:id", (req, res) => {
+        dbFile =JSON.parse(fs.readFileSync(jsonRoute, "utf8"));
+
+        const id = req.params.id;
+        dbFile = dbFile.filter(selectNotes => {
+            return selectNotes.id != id;
+        });
+
+        let notes2 =  JSON.stringify(dbFile);
+        savedbFile(notes2);
+        res.json(dbFile);
+    });
+
+    //save notes to db.json file
+    function savedbFile(notes){
+        fs.writeFileSync(jsonRoute, notes, "utf8", (err) => {
+            if(err){
+                console.log("there is an error")
+            }
+            return "Done";
+        });
+    }
 }
-
-// app.delete("/api/notes/:id", (req, res) => {
-//     let deletedNotes = JSON.parse(fs.readFileSync(jsonRoute, "utf8"));
-//     const id = req.params.id;
-
-//     deletedNotes = deletedNotes.filter(chosenNote =>{
-//         return chosenNote.id != id;
-//     }); 
-// });
