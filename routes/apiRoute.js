@@ -1,33 +1,41 @@
+//dependecies
+const fs = require("fs");
+const path = require("path");
+let dbFile = require("../db/db.json")
+
 //Route for JSON
 const jsonRoute = path.join(_dirname, "./db/db.json");
 
-app.get("/api/notes", function(req, res){
-    res.json(returnData());
-});
+module.exports = function(app){
 
-async function returnData(){
-    const notes = await readFileAsync(jsonRoute, "utf8");
+    app.get("/api/notes", (req, res) => {
+        res.json(dbFile);
+    });
+}
 
-    let parsedArray = JSON.parse(notes);
-    return(parsedArray);
-};
+// async function returnData(){
+//     const notes = await readFileAsync(jsonRoute, "utf8");
 
-app.post("/api/notes", async function(req, res){
-    let notes = await returnData();
+//     let parsedArray = JSON.parse(notes);
+//     return(parsedArray);
+// };
 
-    console.log(req.body);
-    notes.push(req.body);
-    stringedArray = JSON.stringify(notes);
+// app.post("/api/notes", async function(req, res){
+//     let notes = await returnData();
 
-    const post = await writeFileAsync(jsonRoute, stringedArray, "utf8");
-    res.join(stringedArray);
-});
+//     console.log(req.body);
+//     notes.push(req.body);
+//     stringedArray = JSON.stringify(notes);
 
-app.delete("/api/notes/:id", function(req, res){
-    let deletedNotes = JSON.parse(fs.readFileSync(jsonRoute, "utf8"));
-    const id = req.params.id;
+//     const post = await writeFileAsync(jsonRoute, stringedArray, "utf8");
+//     res.join(stringedArray);
+// });
 
-    deletedNotes = deletedNotes.filter(chosenNote =>{
-        return chosenNote.id != id;
-    }); 
-});
+// app.delete("/api/notes/:id", (req, res) => {
+//     let deletedNotes = JSON.parse(fs.readFileSync(jsonRoute, "utf8"));
+//     const id = req.params.id;
+
+//     deletedNotes = deletedNotes.filter(chosenNote =>{
+//         return chosenNote.id != id;
+//     }); 
+// });
