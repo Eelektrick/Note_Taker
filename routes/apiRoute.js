@@ -4,7 +4,7 @@ const path = require("path");
 let dbFile = require("../db/db.json")
 
 //Route for JSON
-const jsonRoute = path.join(__dirname, "./db/db.json");
+let jsonRoute = path.join(__dirname, "./db/db.json");
 
 module.exports = function(app){
 
@@ -41,9 +41,8 @@ module.exports = function(app){
     //save notes to db.json file
     function savedbFile(notes){
         fs.writeFileSync(jsonRoute, notes, "utf8", (err) => {
-            if(err){
-                console.log("there is an error")
-            }
+            if(err) console.log ("there is an error")
+
             return "Done";
         });
     }
