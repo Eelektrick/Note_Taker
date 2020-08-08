@@ -9,6 +9,6 @@ module.exports = function(app){
 
     //if no matching route iis found default to home
     app.get("*", (req, res) => {
-        res.sendFile(path.join(_dirname, "./index.html"))
+        res.sendFile(path.join(__dirname, "./index.html"))
     });
 };

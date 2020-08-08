@@ -4,7 +4,7 @@ const path = require("path");
 let dbFile = require("../db/db.json")
 
 //Route for JSON
-const jsonRoute = path.join(_dirname, "./db/db.json");
+const jsonRoute = path.join(__dirname, "./db/db.json");
 
 module.exports = function(app){
 
