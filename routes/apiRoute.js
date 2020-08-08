@@ -8,7 +8,7 @@ let jsonRoute = path.join(__dirname, "./db/db.json");
 
 module.exports = function(app){
 
-    app.get("/api/notes", (req, res) => {
+    app.get("/api/notes", function(req, res) {
         res.json(dbFile);
     });
 
@@ -19,9 +19,9 @@ module.exports = function(app){
         const randomId = () => parseInt(100 * Math.random());
         req.body.id = randomId();
         dbFile.push(req.body);
-        let notes = JSON.stringify(dbFile);
-        savedbFile(notes);
-        res.json(notes);
+        let note = JSON.stringify(dbFile);
+        savedbFile(note);
+        res.json(note);
     });
 
     //delete notes
@@ -29,18 +29,18 @@ module.exports = function(app){
         dbFile =JSON.parse(fs.readFileSync(jsonRoute, "utf8"));
 
         const id = req.params.id;
-        dbFile = dbFile.filter(selectNotes => {
-            return selectNotes.id != id;
+        dbFile = dbFile.filter(selectNote => {
+            return selectNote.id != id;
         });
 
-        let notes2 =  JSON.stringify(dbFile);
-        savedbFile(notes2);
+        let note1 =  JSON.stringify(dbFile);
+        savedbFile(note1);
         res.json(dbFile);
     });
 
     //save notes to db.json file
-    function savedbFile(notes){
-        fs.writeFileSync(jsonRoute, notes, "utf8", (err) => {
+    function savedbFile(note){
+        fs.writeFileSync(jsonRoute, note, "utf8", function(err) {
             if(err) console.log ("there is an error")
 
             return "Done";
