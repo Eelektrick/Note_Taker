@@ -1,10 +1,10 @@
 //dependecies
 const fs = require("fs");
 const path = require("path");
-let dbFile = require("../db/db.json")
+var dbFile = require("../db/db.json");
 
 //Route for JSON
-let jsonRoute = path.join(__dirname, "./db/db.json");
+var jsonRoute = path.join(__dirname, "../db/db.json");
 
 module.exports = function(app){
 
@@ -25,7 +25,7 @@ module.exports = function(app){
     });
 
     //delete notes
-    app.delete("/api/notes/:id", (req, res) => {
+    app.delete("/api/notes/:id", function(req, res) {
         dbFile =JSON.parse(fs.readFileSync(jsonRoute, "utf8"));
 
         const id = req.params.id;
@@ -42,8 +42,7 @@ module.exports = function(app){
     function savedbFile(note){
         fs.writeFileSync(jsonRoute, note, "utf8", function(err) {
             if(err) console.log ("there is an error")
-
-            return "Done";
+            return `Done`;
         });
     }
 }
